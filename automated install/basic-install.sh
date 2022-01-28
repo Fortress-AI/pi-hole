@@ -1118,7 +1118,7 @@ chooseBlocklists() {
     # Let user select (or not) blocklists via a checklist
     cmd=(whiptail --separate-output --checklist "Pi-hole relies on third party lists in order to block ads.\\n\\nYou can use the suggestion below, and/or add your own after installation\\n\\nTo deselect the suggested list, use spacebar" "${r}" "${c}" 5)
     # In an array, show the options available (all off by default):
-    options=(StevenBlack "StevenBlack's Unified Hosts List" on)
+    options=(FortressAI "FortressAI's Unified Hosts List" on)
 
     # In a variable, show the choices available; exit if Cancel is selected
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty) || { printf "  %bCancel was selected, exiting installer%b\\n" "${COL_LIGHT_RED}" "${COL_NC}"; rm "${adlistFile}" ;exit 1; }
@@ -1136,7 +1136,7 @@ chooseBlocklists() {
 # This function saves duplication between chooseBlocklists and installDefaultBlocklists
 appendToListsFile() {
     case $1 in
-        StevenBlack  )  echo "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" >> "${adlistFile}";;
+        FortressAI  )  echo "https://gist.githubusercontent.com/AWinterFox/4e4b54df63ab5706fd80b6b49bd84afc/raw/6fe28f61d68722210fc61c0ff407f50b5b8af07d/hosts" >> "${adlistFile}";;
     esac
 }
 
@@ -1148,7 +1148,7 @@ installDefaultBlocklists() {
     if [[ -f "${adlistFile}" ]]; then
         return;
     fi
-    appendToListsFile StevenBlack
+    appendToListsFile FortressAI
 }
 
 # Check if /etc/dnsmasq.conf is from pi-hole.  If so replace with an original and install new in .d directory
