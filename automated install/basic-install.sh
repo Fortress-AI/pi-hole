@@ -64,9 +64,9 @@ webroot="/var/www/html"
 # Pi-hole contains various setup scripts and files which are critical to the installation.
 # Search for "PI_HOLE_LOCAL_REPO" in this file to see all such scripts.
 # Two notable scripts are gravity.sh (used to generate the HOSTS file) and advanced/Scripts/webpage.sh (used to install the Web admin interface)
-webInterfaceGitUrl="https://github.com/pi-hole/AdminLTE.git"
+webInterfaceGitUrl="https://github.com/Fortress-AI/AdminLTE.git"
 webInterfaceDir="${webroot}/admin"
-piholeGitUrl="https://github.com/pi-hole/pi-hole.git"
+piholeGitUrl="https://github.com/Fortress-AI/pi-hole.git"
 PI_HOLE_LOCAL_REPO="/etc/.pihole"
 # List of pihole scripts, stored in an array
 PI_HOLE_FILES=(chronometer list piholeDebug piholeLogFlush setupLCD update version gravity uninstall webpage)
@@ -1118,7 +1118,7 @@ chooseBlocklists() {
     # Let user select (or not) blocklists via a checklist
     cmd=(whiptail --separate-output --checklist "Pi-hole relies on third party lists in order to block ads.\\n\\nYou can use the suggestion below, and/or add your own after installation\\n\\nTo deselect the suggested list, use spacebar" "${r}" "${c}" 5)
     # In an array, show the options available (all off by default):
-    options=(StevenBlack "StevenBlack's Unified Hosts List" on)
+    options=(FortressAI "FortressAI's Unified Hosts List" on)
 
     # In a variable, show the choices available; exit if Cancel is selected
     choices=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty) || { printf "  %bCancel was selected, exiting installer%b\\n" "${COL_LIGHT_RED}" "${COL_NC}"; rm "${adlistFile}" ;exit 1; }
@@ -1136,7 +1136,7 @@ chooseBlocklists() {
 # This function saves duplication between chooseBlocklists and installDefaultBlocklists
 appendToListsFile() {
     case $1 in
-        StevenBlack  )  echo "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts" >> "${adlistFile}";;
+        FortressAI  )  echo "https://gist.githubusercontent.com/AWinterFox/deaa4ccffa507497926be52efda44f8b/raw/5a7d6ef9dab59b029a86f2ae0053ba96afca50ea/empty.txt" >> "${adlistFile}";;
     esac
 }
 
@@ -1148,7 +1148,7 @@ installDefaultBlocklists() {
     if [[ -f "${adlistFile}" ]]; then
         return;
     fi
-    appendToListsFile StevenBlack
+    appendToListsFile FortressAI
 }
 
 # Check if /etc/dnsmasq.conf is from pi-hole.  If so replace with an original and install new in .d directory
