@@ -1136,7 +1136,7 @@ chooseBlocklists() {
 # This function saves duplication between chooseBlocklists and installDefaultBlocklists
 appendToListsFile() {
     case $1 in
-        FortressAI  )  echo "https://gist.githubusercontent.com/AWinterFox/4e4b54df63ab5706fd80b6b49bd84afc/raw/6fe28f61d68722210fc61c0ff407f50b5b8af07d/hosts" >> "${adlistFile}";;
+        FortressAI  )  echo "https://gist.githubusercontent.com/AWinterFox/4d10b79153cdb74a5b6e373ca74d58ea/raw/f0c942ffdec81fe526f26eef1e759de99c73d591/boop.txt" >> "${adlistFile}";;
     esac
 }
 
